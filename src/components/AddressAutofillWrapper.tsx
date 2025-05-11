@@ -34,7 +34,7 @@ const AddressAutofillWrapper: React.FC<AddressAutofillWrapperProps> = ({
     setIsLoading(true);
     try {
       const endpoint = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(query)}.json`;
-      const url = `${endpoint}?access_token=${accessToken}&types=address&limit=5`;
+const url = `${endpoint}?access_token=${accessToken}&types=address,country,region,postcode,place&limit=5`;
       
       const response = await fetch(url);
       const data = await response.json();
