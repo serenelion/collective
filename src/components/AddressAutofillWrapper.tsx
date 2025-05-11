@@ -20,22 +20,26 @@ const AddressAutofillWrapper: React.FC<AddressAutofillWrapperProps> = ({
   const [AddressAutofill, setAddressAutofill] = useState<any>(null);
 
   useEffect(() => {
-    setIsClient(true);
+    if (typeof window !== 'undefined') {
+      setIsClient(true);
+    }
+  }, []);
+
+  useEffect(() => {
     const loadAddressAutofill = async () => {
+      if (!isClient) return;
+      
       try {
-        const module = await import('@mapbox/search-js-react');
-        setAddressAutofill(() => module.AddressAutofill);
+        const { AddressAutofill: AddressAutofillComponent } = await import('@mapbox/search-js-react');
+        setAddressAutofill(() => AddressAutofillComponent);
       } catch (error) {
         console.error('Error loading AddressAutofill:', error);
       }
     };
 
-    if (typeof window !== 'undefined') {
-      loadAddressAutofill();
-    }
-  }, []);
+    loadAddressAutofill();
+  }, [isClient]);
 
-  // Return a basic input if we're not in the browser or the component hasn't loaded
   if (!isClient || !AddressAutofill) {
     return (
       <input
@@ -48,7 +52,6 @@ const AddressAutofillWrapper: React.FC<AddressAutofillWrapperProps> = ({
     );
   }
 
-  // Only render the AddressAutofill component when we're in the browser and it's loaded
   return (
     <AddressAutofill
       accessToken={accessToken}
