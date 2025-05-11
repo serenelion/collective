@@ -306,6 +306,7 @@ const AddEnterprise: React.FC = () => {
                     register={register}
                     hasLocation={hasLocation}
                     errors={errors}
+                    setValue={setValue}
                   />
                 </div>
               </div>
