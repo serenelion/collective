@@ -16,31 +16,22 @@ const AddressAutofillWrapper: React.FC<AddressAutofillWrapperProps> = ({
   hasLocation,
   errors
 }) => {
-  const [isClient, setIsClient] = useState(false);
   const [AddressAutofill, setAddressAutofill] = useState<any>(null);
 
   useEffect(() => {
+    // Only import the component when we're in the browser
     if (typeof window !== 'undefined') {
-      setIsClient(true);
+      import('@mapbox/search-js-react')
+        .then(module => {
+          setAddressAutofill(() => module.AddressAutofill);
+        })
+        .catch(error => {
+          console.error('Error loading AddressAutofill:', error);
+        });
     }
   }, []);
 
-  useEffect(() => {
-    const loadAddressAutofill = async () => {
-      if (!isClient) return;
-      
-      try {
-        const { AddressAutofill: AddressAutofillComponent } = await import('@mapbox/search-js-react');
-        setAddressAutofill(() => AddressAutofillComponent);
-      } catch (error) {
-        console.error('Error loading AddressAutofill:', error);
-      }
-    };
-
-    loadAddressAutofill();
-  }, [isClient]);
-
-  if (!isClient || !AddressAutofill) {
+  if (!AddressAutofill) {
     return (
       <input
         type="text"
@@ -56,16 +47,25 @@ const AddressAutofillWrapper: React.FC<AddressAutofillWrapperProps> = ({
     <AddressAutofill
       accessToken={accessToken}
       onRetrieve={onRetrieve}
+      options={{
+        language: 'en',
+        country: 'US'
+      }}
     >
       <input
         type="text"
         id="address"
         placeholder="Start typing an address..."
-        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-500"
+        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-secondary-500 ${
+          errors.address ? 'border-error-500' : 'border-gray-300'
+        }`}
         {...register('address', {
           required: hasLocation ? 'Address is required when adding a location' : false
         })}
       />
+      {errors.address && (
+        <p className="mt-1 text-error-500 text-sm">{errors.address.message}</p>
+      )}
     </AddressAutofill>
   );
 };
