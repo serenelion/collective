@@ -43,7 +43,7 @@ const Home: React.FC = () => {
               Discover Regenerative Enterprises Building a Better Future
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-primary-100">
-              Connect with organizations restoring ecosystems and creating resilient communities
+              Connect with ecological integiry.
             </p>
             
             <div className="max-w-xl mx-auto mb-8">
