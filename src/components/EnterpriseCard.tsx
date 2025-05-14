@@ -10,12 +10,7 @@ interface EnterpriseCardProps {
 const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ enterprise }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <div className={`h-2 ${
-        enterprise.category === 'Land Projects' ? 'bg-primary-500' : 
-        enterprise.category === 'Capital Sources' ? 'bg-secondary-500' : 
-        enterprise.category === 'Open Source Tools' ? 'bg-success-500' : 
-        'bg-earth-500'
-      }`}></div>
+      <div className="h-2 bg-primary-600"></div>
       
       <div className="p-5">
         <div className="flex justify-between items-start mb-2">
@@ -28,12 +23,7 @@ const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ enterprise }) => {
         </div>
         
         <div className="mb-4">
-          <span className={`inline-block px-3 py-1 text-xs rounded-full ${
-            enterprise.category === 'Land Projects' ? 'bg-primary-100 text-primary-800' : 
-            enterprise.category === 'Capital Sources' ? 'bg-secondary-100 text-secondary-800' : 
-            enterprise.category === 'Open Source Tools' ? 'bg-success-100 text-success-700' : 
-            'bg-earth-100 text-earth-800'
-          }`}>
+          <span className="inline-block px-3 py-1 text-xs rounded-full bg-secondary-100 text-secondary-800">
             {enterprise.category}
           </span>
         </div>
@@ -64,7 +54,7 @@ const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ enterprise }) => {
               href={enterprise.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center hover:text-secondary-600"
+              className="flex items-center hover:text-primary-600"
             >
               <Globe size={16} className="mr-2" />
               {enterprise.website.replace(/^https?:\/\//, '')}
@@ -81,12 +71,7 @@ const EnterpriseCard: React.FC<EnterpriseCardProps> = ({ enterprise }) => {
         
         <Link
           to={`/enterprise/${enterprise.id}`}
-          className={`inline-block w-full text-center rounded-md px-4 py-2 text-white ${
-            enterprise.category === 'Land Projects' ? 'bg-primary-600 hover:bg-primary-700' : 
-            enterprise.category === 'Capital Sources' ? 'bg-secondary-600 hover:bg-secondary-700' : 
-            enterprise.category === 'Open Source Tools' ? 'bg-success-600 hover:bg-success-700' : 
-            'bg-earth-600 hover:bg-earth-700'
-          } transition-colors`}
+          className="inline-block w-full text-center rounded-md px-4 py-2 bg-primary-600 text-white hover:bg-primary-700 transition-colors"
         >
           View Details
         </Link>

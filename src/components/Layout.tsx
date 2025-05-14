@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Leaf, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Layout: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -15,14 +15,17 @@ const Layout: React.FC = () => {
       <header className="bg-primary-800 text-white shadow-md">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link to="/" className="flex items-center">
-            <Leaf className="h-8 w-8 mr-2" />
+            <img 
+              src="https://opjtgtcnywocvstkmsqc.supabase.co/storage/v1/object/public/enterprise-logos//Earth%20Care%20Logo.png" 
+              alt="Earth Care Logo" 
+              className="h-10 w-10 mr-2"
+            />
             <div>
               <h1 className="text-xl font-bold">Earth Care: Collective</h1>
               <p className="text-xs">Regenerative Enterprise Directory</p>
             </div>
           </Link>
           
-          {/* Mobile menu button */}
           <button
             className="lg:hidden p-2 rounded hover:bg-primary-700 transition-colors"
             onClick={toggleMenu}
@@ -31,7 +34,6 @@ const Layout: React.FC = () => {
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
           
-          {/* Desktop navigation */}
           <nav className="hidden lg:flex space-x-6 items-center">
             <Link 
               to="/" 
@@ -75,14 +77,13 @@ const Layout: React.FC = () => {
             </Link>
             <Link 
               to="/add-enterprise" 
-              className="bg-secondary-600 hover:bg-secondary-700 px-4 py-2 rounded-lg transition-colors"
+              className="bg-secondary-600 hover:bg-secondary-700 text-white px-4 py-2 rounded-lg transition-colors"
             >
               Add Enterprise
             </Link>
           </nav>
         </div>
         
-        {/* Mobile menu */}
         {isMenuOpen && (
           <div className="lg:hidden bg-primary-700 px-4 py-2">
             <nav className="flex flex-col space-y-2">
@@ -133,7 +134,7 @@ const Layout: React.FC = () => {
               </Link>
               <Link 
                 to="/add-enterprise" 
-                className="bg-secondary-600 hover:bg-secondary-700 px-4 py-2 rounded-lg text-center transition-colors"
+                className="bg-secondary-600 hover:bg-secondary-700 text-white px-4 py-2 rounded-lg text-center transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Add Enterprise
@@ -147,7 +148,7 @@ const Layout: React.FC = () => {
         <Outlet />
       </main>
       
-      <footer className="bg-earth-800 text-white py-8">
+      <footer className="bg-primary-900 text-white py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
