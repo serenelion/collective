@@ -40,10 +40,10 @@ const Home: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Discover Regenerative Enterprises Building a Better Future
+              Discover Regenerative Enterprises
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-primary-100">
-              Connect with ecological integiry.
+              Connect with ecological integrity.
             </p>
             
             <div className="max-w-xl mx-auto mb-8">
